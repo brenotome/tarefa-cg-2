@@ -215,129 +215,56 @@ function onDocumentKeyDown(event) {
     // For now, only prints inserted key
     console.log(event.key);
     animations = {
-        1 : wave,
-        2 : jumpJack
+        1 : WaveAnimation,
+        2 : JumpJackAnimation
     }
     key = parseInt(event.key)
     if (key >= 1 && key <= Object.keys(animations).length){
-        animations[event.key]();
+        animation = new animations[event.key]();
+        animation.run()
     }
 }
 
-function animate() {
+// function animate() {
     
-    requestAnimationFrame(animate);
+//     requestAnimationFrame(animate);
     
-    // Sample animation, you should implement at least 3 animations:
-    // One is the hand wave (as in lecture 3.4)
-    // The other two: explore your creativity =)
-    var rot_pt;
+//     // Sample animation, you should implement at least 3 animations:
+//     // One is the hand wave (as in lecture 3.4)
+//     // The other two: explore your creativity =)
+//     var rot_pt;
     
-    var right_upper_arm = ( (robot.getObjectByName("right_upper_arm")) )
-    rot_pt = new THREE.Vector3
-        (
-            ( right_upper_arm.geometry.parameters.width + right_upper_arm.__position.x) / 2,
-            ( right_upper_arm.geometry.parameters.height + right_upper_arm.__position.y) / 2.25,
-            0
-        );
-    right_upper_arm.rotateAroundPoint( rot_pt, -0.01 );
+//     var right_upper_arm = ( (robot.getObjectByName("right_upper_arm")) )
+//     rot_pt = new THREE.Vector3
+//         (
+//             ( right_upper_arm.geometry.parameters.width + right_upper_arm.__position.x) / 2,
+//             ( right_upper_arm.geometry.parameters.height + right_upper_arm.__position.y) / 2.25,
+//             0
+//         );
+//     right_upper_arm.rotateAroundPoint( rot_pt, -0.01 );
     
 
-    var right_lower_arm = ( (robot.getObjectByName("right_upper_arm")).getObjectByName("lower_arm") );
-    rot_pt = new THREE.Vector3
-        (
-            ( 0) / 2,
-            ( right_lower_arm.__position.y  ) / 1.6,
-            0
-        );
-    right_lower_arm.rotateAroundPoint( rot_pt, 0.005 );
+//     var right_lower_arm = ( (robot.getObjectByName("right_upper_arm")).getObjectByName("lower_arm") );
+//     rot_pt = new THREE.Vector3
+//         (
+//             ( 0) / 2,
+//             ( right_lower_arm.__position.y  ) / 1.6,
+//             0
+//         );
+//     right_lower_arm.rotateAroundPoint( rot_pt, 0.005 );
      
     
 
-    // Update changes to renderer
-    stats.update();
-    renderer.render(scene, camera);
+//     // Update changes to renderer
+//     stats.update();
+//     renderer.render(scene, camera);
 
-}
+// }
 
 function jumpJack(){}
 
-function initWave() {
 
-    let upperArmTween = new TWEEN.Tween({theta:0})
-        .to({theta:degreeToRad(95)},500)
-        .onUpdate(function(){
-            console.log('upper arm')
-            let right_upper_arm = ( (robot.getObjectByName("right_upper_arm")) )
-            let rot_pt = new THREE.Vector3
-                (
-                    ( right_upper_arm.geometry.parameters.width + right_upper_arm.__position.x) / 2,
-                    ( right_upper_arm.geometry.parameters.height + right_upper_arm.__position.y) / 2.25,
-                    -2
-                );
 
-            right_upper_arm.rotateAroundPoint( rot_pt, this._object.theta - right_upper_arm.rotation.z );
-
-            stats.update();
-            renderer.render(scene, camera);    
-        })
-
-    let lowerArmTween = new TWEEN.Tween({theta:degreeToRad(0)})
-        .to({theta:[degreeToRad(110), 0,degreeToRad(110), 0,degreeToRad(110), 0]},2000)
-        .onUpdate(function() {
-            lowerArmTweenUpdate(this._object.theta)
-        })
-    
-    let upperArmBackTween = new TWEEN.Tween({theta:degreeToRad(95)})
-        .to({theta:0},500)
-        .onUpdate(function(){
-            console.log('upper arm')
-            let right_upper_arm = ( (robot.getObjectByName("right_upper_arm")) )
-            let rot_pt = new THREE.Vector3
-                (
-                    ( right_upper_arm.geometry.parameters.width + right_upper_arm.__position.x) / 2,
-                    ( right_upper_arm.geometry.parameters.height + right_upper_arm.__position.y) / 2.25,
-                    -2
-                );
-
-            right_upper_arm.rotateAroundPoint( rot_pt, this._object.theta - right_upper_arm.rotation.z );
-
-            stats.update();
-            renderer.render(scene, camera);    
-        })
-       
-
-    upperArmTween.chain(lowerArmTween)
-    lowerArmTween.chain(upperArmBackTween)
-    // lowerArmTween.repeat(2)
-    // lowerArmTweenBack.chain(lowerArmTween)
-    upperArmTween.start()
-
-}
-
-function lowerArmTweenUpdate(theta) {
-    let right_lower_arm = ( (robot.getObjectByName("right_upper_arm")).getObjectByName("lower_arm") );
-    let rot_pt = new THREE.Vector3
-    (
-        ( 0) / 2,
-        ( right_lower_arm.__position.y  ) / 1.6,
-        0
-    );
-    right_lower_arm.rotateAroundPoint( rot_pt, theta - right_lower_arm.rotation.z );
-    // console.log(right_lower_arm)
-    stats.update();
-    renderer.render(scene, camera);
-}
-
-function animateWave(time){
-    requestAnimationFrame(animateWave);
-    TWEEN.update(time);
-}
-
-function wave() {
-    initWave();
-    animateWave();
-}
 function animateJumpJack(time){
 
 }
