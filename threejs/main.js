@@ -211,62 +211,19 @@ function onWindowResize() {
 }
 
 function onDocumentKeyDown(event) {
-    // One for Hand wave, Two for your Custom Animation #2 and Three - Your Custom Animation #3
+    // One for Hand wave, Two for Jumping Jacks and Three - Alongate
     // For now, only prints inserted key
     console.log(event.key);
     animations = {
         1 : WaveAnimation,
-        2 : JumpJackAnimation
+        2 : JumpJackAnimation,
+        3 : AlongateAnimation
     }
     key = parseInt(event.key)
     if (key >= 1 && key <= Object.keys(animations).length){
         animation = new animations[event.key]();
         animation.run()
     }
-}
-
-// function animate() {
-    
-//     requestAnimationFrame(animate);
-    
-//     // Sample animation, you should implement at least 3 animations:
-//     // One is the hand wave (as in lecture 3.4)
-//     // The other two: explore your creativity =)
-//     var rot_pt;
-    
-//     var right_upper_arm = ( (robot.getObjectByName("right_upper_arm")) )
-//     rot_pt = new THREE.Vector3
-//         (
-//             ( right_upper_arm.geometry.parameters.width + right_upper_arm.__position.x) / 2,
-//             ( right_upper_arm.geometry.parameters.height + right_upper_arm.__position.y) / 2.25,
-//             0
-//         );
-//     right_upper_arm.rotateAroundPoint( rot_pt, -0.01 );
-    
-
-//     var right_lower_arm = ( (robot.getObjectByName("right_upper_arm")).getObjectByName("lower_arm") );
-//     rot_pt = new THREE.Vector3
-//         (
-//             ( 0) / 2,
-//             ( right_lower_arm.__position.y  ) / 1.6,
-//             0
-//         );
-//     right_lower_arm.rotateAroundPoint( rot_pt, 0.005 );
-     
-    
-
-//     // Update changes to renderer
-//     stats.update();
-//     renderer.render(scene, camera);
-
-// }
-
-function jumpJack(){}
-
-
-
-function animateJumpJack(time){
-
 }
 function degreeToRad(degrees) {
     return degrees * Math.PI/180

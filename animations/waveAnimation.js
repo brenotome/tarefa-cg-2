@@ -29,7 +29,6 @@ class WaveAnimation{
                     0
                 );
                 right_lower_arm.rotateAroundPoint( rot_pt, this._object.theta - right_lower_arm.rotation.z );
-                // console.log(right_lower_arm)
                 stats.update();
                 renderer.render(scene, camera);
             })
@@ -37,7 +36,6 @@ class WaveAnimation{
         let upperArmBackTween = new TWEEN.Tween({theta:degreeToRad(95)})
             .to({theta:0},500)
             .onUpdate(function(){
-                console.log('upper arm')
                 let right_upper_arm = ( (robot.getObjectByName("right_upper_arm")) )
                 let rot_pt = new THREE.Vector3
                     (
@@ -55,8 +53,6 @@ class WaveAnimation{
     
         upperArmTween.chain(lowerArmTween)
         lowerArmTween.chain(upperArmBackTween)
-        // lowerArmTween.repeat(2)
-        // lowerArmTweenBack.chain(lowerArmTween)
         upperArmTween.start()       
     }
     animate(time){
